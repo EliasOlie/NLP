@@ -1,0 +1,8 @@
+    if type(phrase) == list:
+        for single_phrase in phrase:
+            single_phrase = single_phrase.lower()
+            len_sentimento = []
+
+            for word in single_phrase.split():
+                len_sentimento.append(dados.get(word))
+                score = sum(len_sentimento)
