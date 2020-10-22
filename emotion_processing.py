@@ -62,7 +62,7 @@ def nlu_instance(phrase):
     "Palavras desconhecidas":unknow_words, 
     "Mensagem":msg,}]
 
-analys = nlu_instance('Esta muito abafado hoje')
+analys = nlu_instance('Hoje estou muito feliz')
 
 
 print(analys[0]["Mensagem"])

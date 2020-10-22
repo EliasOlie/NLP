@@ -5,3 +5,6 @@ Zero division error
 API para testes automátizados (Continuous delivery)
 
 Melhorar o conjunto de dados
+
+
+Baseado em palavras neutras o setimento seja positivo ou negativo deve ser maior como se elas fossem context_variabes
