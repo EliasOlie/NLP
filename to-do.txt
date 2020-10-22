@@ -1,0 +1,7 @@
+Indice de confiaça
+
+Zero division error
+
+API para testes automátizados (Continuous delivery)
+
+Melhorar o conjunto de dados
