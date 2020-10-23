@@ -41,12 +41,22 @@ def nlu_instance(phrase):
     
     
 
-
-    if 2*(score*sum(len_sentimento)/total_words)*100 != 0.0:
-        confidence_index = f'{2*(score*sum(len_sentimento)/total_words)*100}'
+    if score > 0:
+        for i in len_sentimento:
+            if i == 0:
+                len_sentimento.remove(i)
+                len_sentimento.append(.33)
     else:
-        confidence_index = f'{random.uniform(65.33, 87.46)}'
+        for i in len_sentimento:
+            if i == 0:
+                len_sentimento.remove(i)
+                len_sentimento.append(-0.33)
 
+
+
+    confidence_index = f'{2*(score*sum(len_sentimento)/total_words)*100}'
+    if confidence_index ==  '-0.0':
+        confidence_index = 'Baseado nos dados já coletados não posso chegar numa conclusão precisa :/' 
     
     if score > 0:
         msg = f'\nFrase: {phrase.capitalize()}\nResultado da análise:Positvo\nScore = {score}\nIndice de confiança: {confidence_index}\nQuantidades de palavras: {total_words}\nPalavras desconhecidas: {sum(unknow_words)}'
@@ -70,7 +80,7 @@ def nlu_instance(phrase):
     
     return retorno
 
-analys = nlu_instance('acordar cedo')
+analys = nlu_instance('melhor preço e no preço bom')
 
 
 print(analys[0]["Mensagem"])
