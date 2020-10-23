@@ -729,7 +729,7 @@
         "polaridade": -1
     },
     "ao": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "agarrado": {
         "polaridade": -1
@@ -1191,13 +1191,16 @@
         "polaridade": 1
     },
     "da": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "dos": {
         "polaridade": -1
     },
     "amigo": {
         "polaridade": 1
+    },
+    "amigos": {
+        "polaridade" : 1
     },
     "amigalhaÃ§o": {
         "polaridade": 1
@@ -2616,7 +2619,10 @@
         "polaridade": -1
     },
     "para": {
-        "polaridade": -1
+        "polaridade": 0
+    },
+    "parar" : {
+        "polaridade" : 0
     },
     "bacano": {
         "polaridade": 1
@@ -2769,7 +2775,7 @@
         "polaridade": -1
     },
     "no": {
-        "polaridade": 1
+        "polaridade": 0
     },
     "bater": {
         "polaridade": 1
@@ -5820,10 +5826,16 @@
         "polaridade": -1
     },
     "do": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "desaparecido": {
         "polaridade": -1
+    },
+    "caramba" : {
+        "polaridade" : 0
+    },
+    "incrivel" : {
+        "polaridade" : 1
     },
     "desapegado": {
         "polaridade": -1
@@ -7251,7 +7263,13 @@
         "polaridade": -1
     },
     "melhor": {
-        "polaridade": -1
+        "polaridade": 1
+    },
+    "preco":{
+        "polaridade" : 0
+    },
+    "preço":{
+        "polaridade" : 0
     },
     "vÃ­tima": {
         "polaridade": -1
@@ -15368,6 +15386,9 @@
     "gostei": {
         "polaridade": 1
     },
+    "bastante" : {
+        "polaridade" : 0
+    },
     "gosteis": {
         "polaridade": -1
     },
@@ -16392,7 +16413,7 @@
         "polaridade": 1
     },
     "se": {
-        "polaridade": 1
+        "polaridade": 0
     },
     "sede": {
         "polaridade": -1
@@ -16889,8 +16910,8 @@
     "ver": {
         "polaridade": -1
     },
-    "verÃ¡": {
-        "polaridade": -1
+    "verão": {
+        "polaridade": 1
     },
     "verÃ£o": {
         "polaridade": -1
