@@ -78,10 +78,10 @@
         "polaridade": 0
     },
     "o": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "os": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "abespinhado": {
         "polaridade": -1
@@ -1842,7 +1842,7 @@
         "polaridade": -1
     },
     "um": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "arrasar": {
         "polaridade": 1
@@ -2860,6 +2860,9 @@
     },
     "belicoso": {
         "polaridade": -1
+    },
+    "bolo" : {
+        "polaridade": 1
     },
     "ataviada": {
         "polaridade": 0
@@ -6765,7 +6768,7 @@
         "polaridade": -1
     },
     "comer": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "dobrar": {
         "polaridade": -1
