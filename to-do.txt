@@ -6,5 +6,8 @@ API para testes automátizados (Continuous delivery)
 
 Melhorar o conjunto de dados
 
+context_variabes = nao gostei (negativo) | gostei = 0 não = 0 if index(gostei) - 1 == não:
+autualmente está neutro ou positivo gostei = 1
+
 
 Baseado em palavras neutras o setimento seja positivo ou negativo deve ser maior como se elas fossem context_variabes

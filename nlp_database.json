@@ -5,6 +5,9 @@
     "abafado": {
         "polaridade": -1
     },
+    "agradavel" : {
+        "pilaridade" : 1
+    },
     "abafante": {
         "polaridade": -1
     },
@@ -307,6 +310,12 @@
     },
     "na": {
         "polaridade": 1
+    },
+    "nao" : {
+        "polaridade" : 0
+    },
+    "não" : {
+        "polaridade" : 0
     },
     "acertado": {
         "polaridade": 1
@@ -15381,10 +15390,10 @@
         "polaridade": -1
     },
     "goste": {
-        "polaridade": -1
+        "polaridade": 0
     },
     "gostei": {
-        "polaridade": 1
+        "polaridade": 0
     },
     "bastante" : {
         "polaridade" : 0
