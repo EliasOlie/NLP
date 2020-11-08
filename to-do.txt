@@ -1,13 +1,49 @@
-Indice de confiaça
 
-Zero division error
+Detection:
 
-API para testes automátizados (Continuous delivery)
+Detectar frases e sentimentos (Okay falta polimento)
 
-Melhorar o conjunto de dados
+Relçoes de pre-posições
+
+**### Normalização de caracteres unicode ###** Important! (falta)
+
+Indice de confiaça - (+-)
+
+Zero division error (Exeption handle - falta)
+
+API para testes automátizados (Continuous delivery) (falta)
+
+Melhorar o conjunto de dados (falta)
 
 context_variabes = nao gostei (negativo) | gostei = 0 não = 0 if index(gostei) - 1 == não:
-autualmente está neutro ou positivo gostei = 1
+autualmente está neutro ou positivo gostei = 1 (bug) 
 
 
-Baseado em palavras neutras o setimento seja positivo ou negativo deve ser maior como se elas fossem context_variabes
+Baseado em palavras neutras o setimento seja positivo ou negativo deve ser maior como se elas fossem context_variabes (Okay)
+_________________________________________________________________________________________________________
+
+Intents - Baseado no contexto de:
+
+Ex: Que horas são?
+
+
+* intenção - Que (Qual inteção de saber Que? Qual?)
+
+* 'entidade' - Horas (Tempo - é meio que uma entidade de medida)
+
+* tempo - São? (Nesse momento!)
+
+Intra relaçãoes intenção x entidade x tempo e cada isolado
+
+======================
+intenção x entidade
+intenção x intenção
+intenção x tempo
+======================
+entidade x entidade
+entidade x intenção
+entidade x tempo
+======================
+tempo x entidade
+tempo x intenção
+tempo x tempo

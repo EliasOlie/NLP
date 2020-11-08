@@ -1,6 +1,4 @@
 import json
-import sys
-import random
 
 with open('nlp_database.json', 'r') as json_file:
     dados = json.load(json_file)
@@ -54,7 +52,7 @@ def nlu_instance(phrase):
 
 
 
-    confidence_index = f'{2*(score*sum(len_sentimento)/total_words)*100}'
+    confidence_index = f'{2*abs(score)/(total_words-sum(unknow_words))*100}%'
     if confidence_index ==  '-0.0':
         confidence_index = 'Baseado nos dados já coletados não posso chegar numa conclusão precisa :/' 
     

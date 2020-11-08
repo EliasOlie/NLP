@@ -5,11 +5,12 @@ with open('nlp_database.json', 'r') as json_file:
 
 def nlu_instance(phrase):
    
+
     if type(phrase) == str:
         
         phrase = phrase.lower()
         len_sentimento = []
-        unknow_words = 0
+        unknow_words = []
 
         
         lista_palavra = phrase.split()
@@ -23,10 +24,12 @@ def nlu_instance(phrase):
             
             if actual_word is not None:
                 #Não context check
-                if actual_word == 'gostei' and lista_palavra[context1] == 'nao':
+                if actual_word == 'gostei' and lista_palavra[context1]  == 'nao': 
                     len_sentimento.append(-1)
+                if actual_word == 'gostei' and lista_palavra[context1] == None:
+                    len.append(1)
                 else:
-                    len_sentimento.append(1)
+                    len_sentimento.append(0)
 
                 
                 for key, value in actual_word.items():
@@ -37,18 +40,14 @@ def nlu_instance(phrase):
             
             else:
                 
-                unknow_words += 1
+                unknow_words.append(1)
                 len_sentimento.append(0)
             
                 
             score = sum(len_sentimento)  
-
             
     else:
-        print('Apenas string! ')
-    
-    
-    
+        print('Apenas string! ')    
 
     if score > 0:
         for i in len_sentimento:
@@ -62,13 +61,13 @@ def nlu_instance(phrase):
                 len_sentimento.append(-0.33)
 
 
-
-    confidence_index = 2 * (total_words-unknow_words)/abs(score)*100
-    if confidence_index < 0:
+    confidence_index = f'{abs(score)/(total_words)*100}' #exeption handle (Zero divisin error)
+    
+    if float(confidence_index) < 0:
         confidence_index = 'Baseado nos dados já coletados não posso chegar numa conclusão precisa :/' 
     
     if score > 0:
-        msg = f'\nFrase: {phrase.capitalize()}\nResultado da análise:Positvo\nScore = {score}\nIndice de confiança: {confidence_index}\nQuantidades de palavras: {total_words}\nPalavras desconhecidas: {sum(unknow_words)}'
+        msg = f'\nFrase: {phrase.capitalize()}\nResultado da análise:Positvo\nScore = {score}\nIndice de confiança: {confidence_index}%\nQuantidades de palavras: {total_words}\nPalavras desconhecidas: {sum(unknow_words)}'
     
     elif score == 0:
         msg = f'\nFrase: {phrase.capitalize()}\nResultado da análise: Neutro\nScore = {score}\nIndice de confiança: {confidence_index}\nQuantidades de palavras: {total_words}\nPalavras desconhecidas: {sum(unknow_words)}'
@@ -87,11 +86,12 @@ def nlu_instance(phrase):
                 
                 }
     
+    print(lista_palavra[context1]  == 'nao')
 
     return retorno
 
 
-analys = nlu_instance('não gostei do pao')
+analys = nlu_instance('nao gostei do pao')
 
 
 print(analys["Mensagem"])
