@@ -1,97 +1,121 @@
 import json
+import unicodedata
 
-with open('nlp_database.json', 'r') as json_file:
+with open('nlp_database.json', 'r', encoding='utf-8') as json_file:
     dados = json.load(json_file)
 
-def nlu_instance(phrase):
+
+def normalization(word):
+    normalized = unicodedata.normalize('NFD',word)
+    return normalized.encode('ascii', 'ignore').decode('utf8').casefold()
+
+def nlu_instance(phrase): #Separação e atribuição de polaridade
    
+    len_sentimento = []
+    unknow_words = 0
+    know_words = 0
 
     if type(phrase) == str:
         
-        phrase = phrase.lower()
-        len_sentimento = []
-        unknow_words = []
-
+        phrase = normalization(phrase.lower())
         
         lista_palavra = phrase.split()
-        
-        context1 =  lista_palavra.index('gostei') - 1
 
         for word in lista_palavra:
             
-            total_words = len(phrase.split())
             actual_word = dados.get(word)
             
             if actual_word is not None:
-                #Não context check
-                if actual_word == 'gostei' and lista_palavra[context1]  == 'nao': 
-                    len_sentimento.append(-1)
-                if actual_word == 'gostei' and lista_palavra[context1] == None:
-                    len.append(1)
-                else:
-                    len_sentimento.append(0)
 
-                
                 for key, value in actual_word.items():
                     
                     temp = [key,value]
                     len_sentimento.append(temp[1])
+                    know_words += 1
                     
-            
             else:
                 
-                unknow_words.append(1)
+                unknow_words += 1
                 len_sentimento.append(0)
             
-                
-            score = sum(len_sentimento)  
+    else:
+        print('Apenas string! ') 
+    
+    score = sum(len_sentimento)  
+
+    # 1° Passo (to-do)
+    return [score, know_words, unknow_words] # Retorno desse módulo do 1° processo implementar de maneira que as outras funções possam fazer proveito dele
+
+def get_confidenceIndex(phrase_list, know_words):
+
+    if know_words > 0:
+
+        total_words = len(phrase_list.split())
+        cf =  know_words / total_words #exeption handle (Zero divisin error) | Função especifica
+
+
+    else:
+        cf = 'Baseado nos dados já coletados não posso chegar numa conclusão precisa'
+
+    return cf 
+
+def get_context(phrase_list):
+
+    score = 0
+
+    negative_context = ['não', 'nao', 'Não', 'Nao']
+
+    phrase_list = phrase_list.split()
+
+    context1 =  phrase_list.index('gostei') - 1 #Separar para isolamento em função separada
+
+    if context1 >= 0: #Separar para função isolada
+        if 'gostei' in phrase_list and phrase_list[context1] in negative_context:
+            score -= 1
+        else:
+            score += 1
+    else:
+        pass
+
+    return score
+
+def nutshell(score, cf, tw, uw, msg):
+   
+    retorno = { # função isolada
             
-    else:
-        print('Apenas string! ')    
-
-    if score > 0:
-        for i in len_sentimento:
-            if i == 0:
-                len_sentimento.remove(i)
-                len_sentimento.append(.33)
-    else:
-        for i in len_sentimento:
-            if i == 0:
-                len_sentimento.remove(i)
-                len_sentimento.append(-0.33)
-
-
-    confidence_index = f'{abs(score)/(total_words)*100}' #exeption handle (Zero divisin error)
-    
-    if float(confidence_index) < 0:
-        confidence_index = 'Baseado nos dados já coletados não posso chegar numa conclusão precisa :/' 
-    
-    if score > 0:
-        msg = f'\nFrase: {phrase.capitalize()}\nResultado da análise:Positvo\nScore = {score}\nIndice de confiança: {confidence_index}%\nQuantidades de palavras: {total_words}\nPalavras desconhecidas: {sum(unknow_words)}'
-    
-    elif score == 0:
-        msg = f'\nFrase: {phrase.capitalize()}\nResultado da análise: Neutro\nScore = {score}\nIndice de confiança: {confidence_index}\nQuantidades de palavras: {total_words}\nPalavras desconhecidas: {sum(unknow_words)}'
-    
-    else:
-        msg = f'\nFrase: {phrase.capitalize()}\nResultado da análise: Negativo\nScore = {score}\nIndice de confiança: {confidence_index}\nQuantidades de palavras: {total_words}\nPalavras desconhecidas: {sum(unknow_words)}'
-
-    
-    retorno = {
-                
-                "Score":score,
-                "Confidence":confidence_index, 
-                "Numero de palavras":total_words, 
-                "Palavras desconhecidas":unknow_words, 
-                "Mensagem":msg
-                
-                }
-    
-    print(lista_palavra[context1]  == 'nao')
-
+            "Polaridade":score,
+            "Confidence":cf, 
+            "Numero de palavras":tw, 
+            "Palavras desconhecidas":uw, 
+            "Mensagem":msg
+            
+            }
     return retorno
 
 
-analys = nlu_instance('nao gostei do pao')
+def processing(phrase):
+    
+    #Análise da polaridade da frase e atribuição de variáveis úteis
+    nluscore = nlu_instance(phrase)
+    ukwwords = nluscore[2]
+    knowords = nluscore[1]
 
+    #Atualizar o score através das variáveis de contexto
+    contextscore = get_context(phrase)
 
-print(analys["Mensagem"])
+    #Calcular o índice de confiança
+    cf = get_confidenceIndex(phrase, knowords)
+
+    #Criação da mensagem de análise de polaridade sentimental da frase
+    if contextscore > 0:
+        msg = f'A frase {phrase} é positiva'
+    elif contextscore == 0:
+        msg = f'A frase "{phrase}" é neutra'
+    else:
+        msg = f'A frase "{phrase}" é negativa'
+
+    nut = nutshell(contextscore, cf, len(phrase.split()), ukwwords, msg)
+
+    print(nut)
+
+processing('Não gostei do pão')
