@@ -48,6 +48,14 @@ def nlu_instance(phrase): #Separação e atribuição de polaridade
 
 def get_confidenceIndex(phrase_list, know_words):
 
+    #Confidence index is the reason between the know words in the phrase and the lenght of the phrase
+    #In this way it means that how many know words in the phrase we have, more confidence we will have
+    #And how less, les confidence. How it is divided by the total words, it means that we always have for
+    #Total words != 0 confidence index (CF)  0 < CF <= 1, that means how close to 1 greater is the confidence
+    #and close to zero low confidence. By the fact that we can find a phrase where not a single word is 
+    #Counted by our database, we specify that the math reason is just valid for Know_words > 0, else we display
+    #A message telling that we can't reach to a precise conclison based on zero know words 
+
     if know_words > 0:
 
         total_words = len(phrase_list.split())
