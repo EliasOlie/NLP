@@ -1,5 +1,8 @@
 import time
 
+##Not ready yet
+
+
 def intents_processing(phrase):
     
     intents = ['que', 'qual', 'quando', 'quem', 'quais']

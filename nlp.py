@@ -126,4 +126,4 @@ def processing(phrase):
 
     print(nut)
 
-processing('Não gostei do pão')
+#processing('Não gostei do pão')
