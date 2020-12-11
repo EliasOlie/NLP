@@ -50,7 +50,7 @@ setup(
     author='Elias Olie',
     author_email='contato.eliasolie@gmail.com',
     url='https://github.com/EliasOlie/NLP',
-    packages=[],
+    packages=['nlp'],
 )
 
 
