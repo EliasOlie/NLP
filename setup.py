@@ -43,7 +43,15 @@ if "install" in sys.argv:
             break
 
 
-setup()
+setup(
+    name='NLP',
+    version='1.0',
+    description='Python natural language processing algorithm in brazilian portuguese',
+    author='Elias Olie',
+    author_email='contato.eliasolie@gmail.com',
+    url='https://github.com/EliasOlie/NLP',
+    packages=['nlp'],
+)
 
 
 if overlay_warning:
