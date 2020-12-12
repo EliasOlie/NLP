@@ -1,7 +1,7 @@
 import json
 import unicodedata
 
-with open('nlp_database.json', 'r', encoding='utf-8') as json_file:
+with open('nlp/nlp_database.json', 'r', encoding='utf-8') as json_file:
     dados = json.load(json_file)
 
 
