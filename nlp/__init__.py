@@ -1,4 +1,4 @@
-from nlp import processing
+import nlp
 
 def nlprocess(phrase):
-    return processing(phrase)
+    return nlp.processing(phrase)
