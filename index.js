@@ -14,12 +14,11 @@ app.post('/phrase', (req, res) =>{
 
     process.stdout.on('data', function (data) {
         
-        //data é um object -> typeof(data) = object
+        res.send(data.toString())
         
-        res.send(data);
         
     })
-
 });
+
 
 app.listen(process.env.PORT || 8880);
