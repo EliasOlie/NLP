@@ -1,9 +1,6 @@
 from epp import display
 import sys
 
-# print(sys.argv, 'oi')
-
-
 def displays(*args):
     return args
 
