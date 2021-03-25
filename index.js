@@ -19,6 +19,20 @@ app.post('/phrase', (req, res) =>{
         
     })
 });
+app.post('/intent', (req, res) =>{
+    
+    var spawn = require('child_process').spawn
+    const phrase = req.body;
+
+    var process = spawn('python', ['./backend/pipeline.py', phrase['phrase']]);
+
+    process.stdout.on('data', function (data) {
+        
+        res.send(data.toString())
+        
+    })
+});
+
 
 
 app.listen(process.env.PORT || 8880);

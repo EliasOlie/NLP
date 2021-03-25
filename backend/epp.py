@@ -1,11 +1,14 @@
 import json
 import unicodedata
 
-with open('backend/nlp_database.json', 'r', encoding='utf-8') as json_file:
+with open('./backend/nlp_database.json', 'r', encoding='utf-8') as json_file:
     dados = json.load(json_file)
 
 
-def normalization(word): #Normalização da frase, removendo caracteres especiais e afins
+def normalization(word:str) -> str:
+    """
+    Normalização da frase, removendo caracteres especiais e afins
+    """
     normalized = unicodedata.normalize('NFD',word)
     return normalized.encode('ascii', 'ignore').decode('utf8').casefold()
 
