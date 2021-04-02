@@ -1,2 +1,0 @@
-        else:
-            score += 0

@@ -3,6 +3,8 @@ from epp import normalization
 import json
 from typing import TypedDict
 
+#SPCB - Single Purpuse Conversational Bot
+
 with open('./backend/phrases.json', 'r', encoding='utf-8') as json_file:
     frases = json.load(json_file)
 
@@ -51,6 +53,8 @@ def get_intents(phrase:str, base_list:list, keywords: list) -> dict:
     for symbol in symbols:
         if symbol in phrase:
             analisys_phrase = phrase.replace(symbol, "")
+        else:
+            analisys_phrase = phrase
     
     score = 0
 
@@ -81,4 +85,5 @@ def get_result(phrase):
     resultado = get_intents(phrase, frases, ['ficha', 'dado'])
     return print(normalization(resultado['mensagem']))
 
-get_result('Como faz para rolar um dado?')
+a=get_intents('como crio uma ficha', frases, ['ficha', 'dado'])
+print(a['mensagem'])
