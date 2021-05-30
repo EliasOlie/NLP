@@ -4,13 +4,16 @@ import utils
 
 """
 TODO:
-• Colocar nome dos metodos em portugues
+• Colocar nome dos metodos em portugues ✔
 • Comentar o código (PT-BR) e (EN)
-• Integrar com o servidor (JS, Flask)
-• TypeHints e datatype personalizado
-• Ajustar NewType
+• Integrar com o servidor (JS) ✔
+• TypeHints e datatype personalizado ✔
 • Refatorar código para não se repetir. Usar comprehensions
 • Validar frases e exeption handlers
+• Unittest
+• Quando o resultado é str (Não teve dados sulficientes) (__indice_de_confianca) ✔
+• Aumentar lista de palavras com contexto (__atribuir_contexto)
+
 """
 
 polaridade = NewType('Polaridade', int)
@@ -20,7 +23,7 @@ with open('./backend/nlp_database.json', 'r', encoding='utf-8') as json_file:
     dados = json.load(json_file)
 
 class NLP(object):
-    NLP_Instance = NewType('NLP_Instance', object)
+    nlp_instace = NewType('nlp_instace', object)
 
     """
     (PT-BR) Classe básica. Aceita apenas um argumento que é a frase (do tipo str) a ser processada e retorna
@@ -30,17 +33,15 @@ class NLP(object):
     the phrase is processed and then it returns a JSON with the processed data.
     """
 
-    def __init__(self, frase:str) -> NLP_Instance:
+    def __init__(self, frase:str) -> nlp_instace:
 
         self.frase = utils.normalization(frase)
-        self.process = {'resultado': f'{self.__processing()["Mensagem"]}, score: {round(self.__processing()["Confidence"]*100)}%'}
+        self.process = {'resultado': f'{self.__processar()["Mensagem"]}, score: {self.__processar()["Confidence"]}'}
         
-        # 'Confianca': {self.__processing()["Confidence"]}}
-
-    def __separar_frase(self, frase):
-        len_sentimento = [] #Lista que conterá a polaridade de cada palavra, para posteriormente obter o total, como neutro, positivo ou negativo
-        unknow_words = 0 #Palavras desconhecidas é importante sua contagem, pois, dessa forma um indice de confiança fica mais preciso
-        know_words = 0 #Palavras conhecidas, mesma razão das palavras desconhecidas
+    def __separar_frase(self):
+        len_sentimento: list = [] #Lista que conterá a polaridade de cada palavra, para posteriormente obter o total, como neutro, positivo ou negativo
+        unknow_words: int = 0     #Palavras desconhecidas é importante sua contagem, pois, dessa forma um indice de confiança fica mais preciso
+        know_words: int = 0       #Palavras conhecidas, mesma razão das palavras desconhecidas
         
         lista_palavra = self.frase.split()
 
@@ -61,7 +62,9 @@ class NLP(object):
                 unknow_words += 1
                 len_sentimento.append(0)
 
-        polarity = sum(len_sentimento)
+        json_file.close()
+        
+        polarity: int = sum(len_sentimento)
 
         return [polarity, know_words, unknow_words]
 
@@ -69,18 +72,17 @@ class NLP(object):
         if know_words > 0:
 
             total_words = len(phrase_list.split()) #mover para processos iniciais <-*
-            cf =  know_words / total_words  #exeption handle (Zero divisin error) | Função especifica
+            cf =  f'{round(know_words / total_words *100)}%'
 
         else:
             cf = 'Baseado nos dados já coletados não posso chegar numa conclusão precisa'
 
-        return cf 
+        return cf
 
-    def __get_context(self,phrase_list, overallpolarity) -> indice_confianca:
+    def __atribuir_contexto(self, phrase_list:list, overallpolarity:int) -> indice_confianca:
 
-        score = 0
+        score: int = 0
 
-        #Aumentar lista de palavras com contexto
         negative_context = ['não', 'nao', 'Não', 'Nao']
         palavras_neutras = ['gostei']
 
@@ -88,7 +90,7 @@ class NLP(object):
         phrase_list = phrase_list.split()
         try:
             context1 =  phrase_list.index(palavras_neutras[0]) - 1
-            if context1 >= 0: #Separar para função isolada
+            if context1 >= 0: 
                 if palavras_neutras[0] in phrase_list and phrase_list[context1] in negative_context:
                     score -= 1
                 else:
@@ -101,9 +103,9 @@ class NLP(object):
 
         return overallpolarity
 
-    def __nutshell(self,score, cf, tw, uw, msg) -> object:
+    def __resumo(self,score:int, cf:float, tw:int, uw:int, msg:str) -> object:
    
-        retorno = { # função isolada
+        retorno: object = {
                 
                 "Polaridade":score,
                 "Confidence":cf, 
@@ -116,27 +118,26 @@ class NLP(object):
         return retorno
 
 
-    def __processing(self) -> NLP_Instance:
+    def __processar(self) -> nlp_instace:
     
         #Análise da polaridade da frase e atribuição de variáveis úteis
-        nluscore = self.__separar_frase(self.frase)
+        nlp_instance = self.__separar_frase()
 
         #Atualizar o score através das variáveis de contexto
-        contextscore = self.__get_context(self.frase, nluscore[0])
+        contextscore = self.__atribuir_contexto(self.frase, nlp_instance[0])
 
         #Calcular o índice de confiança
-        cf = self.__indice_de_confianca(self.frase, nluscore[1])
+        cf = self.__indice_de_confianca(self.frase, nlp_instance[1])
 
         #Criação da mensagem de análise de polaridade sentimental da frase
         if contextscore > 0:
-            msg = f'A frase "{self.frase}" é positiva' # {self.frase}
+            msg = f'A frase "{self.frase}" é positiva'
         elif contextscore == 0:
             msg = f'A frase "{self.frase}" é neutra'
         else:
             msg = f'A frase "{self.frase}" é negativa'
 
-        #Criação do objeto Json
-        nut = self.__nutshell(contextscore, cf, len(self.frase.split()), nluscore[2], utils.normalization(msg))
+        nut = self.__resumo(contextscore, cf, len(self.frase.split()), nlp_instance[2], utils.normalization(msg))
 
         return nut
 
@@ -146,6 +147,6 @@ class NLP(object):
 
 if __name__ == "__main__":
     
-    a1 = NLP('Não gostei muito desse pão')
+    a1 = NLP('Produto péssimo')
     print(a1.process)
  

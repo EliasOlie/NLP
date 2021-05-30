@@ -10,5 +10,4 @@ my_data = a[0][1]
 res = NLP(my_data)
 print(res.process)
 
-
 sys.stdout.flush()
