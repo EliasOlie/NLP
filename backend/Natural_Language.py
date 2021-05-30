@@ -20,7 +20,7 @@ with open('./backend/nlp_database.json', 'r', encoding='utf-8') as json_file:
     dados = json.load(json_file)
 
 class NLP(object):
-    Natural_Language_Processing_Intance = NewType('NLP_Instance', object)
+    NLP_Instance = NewType('NLP_Instance', object)
 
     """
     (PT-BR) Classe básica. Aceita apenas um argumento que é a frase (do tipo str) a ser processada e retorna
@@ -30,7 +30,7 @@ class NLP(object):
     the phrase is processed and then it returns a JSON with the processed data.
     """
 
-    def __init__(self, frase:str) -> Natural_Language_Processing_Intance:
+    def __init__(self, frase:str) -> NLP_Instance:
 
         self.frase = utils.normalization(frase)
         self.process = {'resultado': f'{self.__processing()["Mensagem"]}, score: {round(self.__processing()["Confidence"]*100)}%'}
@@ -93,9 +93,8 @@ class NLP(object):
                     score -= 1
                 else:
                     score += 1
-                    pass
         except:
-            raise ValueError
+            pass
 
         overallpolarity += score
 
@@ -117,7 +116,7 @@ class NLP(object):
         return retorno
 
 
-    def __processing(self) -> Natural_Language_Processing_Intance:
+    def __processing(self) -> NLP_Instance:
     
         #Análise da polaridade da frase e atribuição de variáveis úteis
         nluscore = self.__separar_frase(self.frase)
@@ -147,7 +146,6 @@ class NLP(object):
 
 if __name__ == "__main__":
     
-    # print(utils.normalization('Olá'))
-    a1 = NLP('Não gostei do pão')
+    a1 = NLP('Não gostei muito desse pão')
     print(a1.process)
  
