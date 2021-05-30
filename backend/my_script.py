@@ -1,4 +1,4 @@
-from epp import display
+from Natural_Language import NLP
 import sys
 
 def displays(*args):
@@ -7,6 +7,8 @@ def displays(*args):
 a = displays(sys.argv)
 my_data = a[0][1]
 
-display(my_data)
+res = NLP(my_data)
+print(res.process)
+
 
 sys.stdout.flush()
