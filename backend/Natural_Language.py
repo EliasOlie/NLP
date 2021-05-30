@@ -33,7 +33,7 @@ class NLP(object):
     def __init__(self, frase:str) -> Natural_Language_Processing_Intance:
 
         self.frase = utils.normalization(frase)
-        self.process = {'resultado': f'{self.__processing()["Mensagem"]}, ' f'score: {round(self.__processing()["Confidence"]*100)}%'}
+        self.process = {'resultado': f'{self.__processing()["Mensagem"]}, score: {round(self.__processing()["Confidence"]*100)}%'}
         
         # 'Confianca': {self.__processing()["Confidence"]}}
 
@@ -65,7 +65,7 @@ class NLP(object):
 
         return [polarity, know_words, unknow_words]
 
-    def __indice_de_confiança(self, phrase_list: list, know_words: list) -> indice_confianca:
+    def __indice_de_confianca(self, phrase_list: list, know_words: list) -> indice_confianca:
         if know_words > 0:
 
             total_words = len(phrase_list.split()) #mover para processos iniciais <-*
@@ -94,10 +94,8 @@ class NLP(object):
                 else:
                     score += 1
                     pass
-            else:
-                pass
         except:
-            pass
+            raise ValueError
 
         overallpolarity += score
 
@@ -128,7 +126,7 @@ class NLP(object):
         contextscore = self.__get_context(self.frase, nluscore[0])
 
         #Calcular o índice de confiança
-        cf = self.__indice_de_confiança(self.frase, nluscore[1])
+        cf = self.__indice_de_confianca(self.frase, nluscore[1])
 
         #Criação da mensagem de análise de polaridade sentimental da frase
         if contextscore > 0:
