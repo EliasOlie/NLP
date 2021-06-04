@@ -5,14 +5,15 @@ import utils
 """
 TODO:
 • Colocar nome dos metodos em portugues ✔
-• Comentar o código (PT-BR) e (EN)
+• Comentar o código (PT-BR) e (EN) ✖
 • Integrar com o servidor (JS) ✔
 • TypeHints e datatype personalizado ✔
-• Refatorar código para não se repetir. Usar comprehensions
-• Validar frases e exeption handlers
-• Unittest
-• Quando o resultado é str (Não teve dados sulficientes) (__indice_de_confianca) ✔
-• Aumentar lista de palavras com contexto (__atribuir_contexto)
+• Refatorar código para não se repetir. Usar comprehensions ✖
+• Validar frases e exeption handlers ✖
+• Unittest ✖
+• Quando o resultado é str (Não teve dados sulficientes) (__i ndice_de_confianca) ✔
+• Aumentar lista de palavras com contexto (__atribuir_contexto) ✖
+• Retorno não está como JSON, corrigir ✔
 
 """
 
@@ -36,7 +37,7 @@ class NLP(object):
     def __init__(self, frase:str) -> nlp_instace:
 
         self.frase = utils.normalization(frase)
-        self.process = {'resultado': f'{self.__processar()["Mensagem"]}, score: {self.__processar()["Confidence"]}'}
+        self.process = self.__processar()
         
     def __separar_frase(self):
         len_sentimento: list = [] #Lista que conterá a polaridade de cada palavra, para posteriormente obter o total, como neutro, positivo ou negativo
@@ -51,10 +52,9 @@ class NLP(object):
             
             if actual_word is not None:
 
-                for key, value in actual_word.items():
+                for value in actual_word.values():
                     
-                    temp = [key,value]
-                    len_sentimento.append(temp[1])
+                    len_sentimento.append(value)
                     know_words += 1
                     
             else:
@@ -106,6 +106,7 @@ class NLP(object):
     def __resumo(self,score:int, cf:float, tw:int, uw:int, msg:str) -> object:
    
         retorno: object = {
+            
                 
                 "Polaridade":score,
                 "Confidence":cf, 
@@ -114,6 +115,7 @@ class NLP(object):
                 "Mensagem":msg
                 
                 }
+        retorno = json.dumps(retorno)
 
         return retorno
 
