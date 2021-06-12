@@ -1,7 +1,5 @@
 import json
 from typing import NewType
-# import utils
-
 import unicodedata
 
 def normalization(word) -> str:
