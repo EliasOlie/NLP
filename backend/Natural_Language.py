@@ -1,6 +1,17 @@
 import json
 from typing import NewType
-import utils
+# import utils
+
+import unicodedata
+
+def normalization(word) -> str:
+    
+        #Normalização da frase, removendo caracteres especiais e afins
+        
+        normalized = unicodedata.normalize('NFD', word)
+        
+        return  normalized.encode('ascii', 'ignore').decode('utf8').casefold()
+
 
 """
 TODO:
@@ -20,7 +31,7 @@ TODO:
 polaridade = NewType('Polaridade', int)
 indice_confianca = NewType('Indice de confianca', [float or str])
 
-with open('./backend/nlp_database.json', 'r', encoding='utf-8') as json_file:
+with open('backend/nlp_database.json', 'r', encoding='utf-8') as json_file:
     dados = json.load(json_file)
 
 class NLP(object):
@@ -36,7 +47,7 @@ class NLP(object):
 
     def __init__(self, frase:str) -> nlp_instace:
 
-        self.frase = utils.normalization(frase)
+        self.frase = normalization(frase)
         self.process = self.__processar()
         
     def __separar_frase(self):
@@ -139,7 +150,7 @@ class NLP(object):
         else:
             msg = f'A frase "{self.frase}" é negativa'
 
-        nut = self.__resumo(contextscore, cf, len(self.frase.split()), nlp_instance[2], utils.normalization(msg))
+        nut = self.__resumo(contextscore, cf, len(self.frase.split()), nlp_instance[2], normalization(msg))
 
         return nut
 
@@ -149,6 +160,6 @@ class NLP(object):
 
 if __name__ == "__main__":
     
-    a1 = NLP('Produto péssimo')
+    a1 = NLP('Gosto muito de você')
     print(a1.process)
  
