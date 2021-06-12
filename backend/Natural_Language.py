@@ -52,8 +52,8 @@ class NLP(object):
         
     def __separar_frase(self):
         len_sentimento = [] #Lista que conterá a polaridade de cada palavra, para posteriormente obter o total, como neutro, positivo ou negativo
-        unknow_words: int = 0     #Palavras desconhecidas é importante sua contagem, pois, dessa forma um indice de confiança fica mais preciso
-        know_words: int = 0       #Palavras conhecidas, mesma razão das palavras desconhecidas
+        unknow_words = 0     #Palavras desconhecidas é importante sua contagem, pois, dessa forma um indice de confiança fica mais preciso
+        know_words= 0       #Palavras conhecidas, mesma razão das palavras desconhecidas
         
         lista_palavra = self.frase.split()
 
@@ -75,7 +75,7 @@ class NLP(object):
 
         json_file.close()
         
-        polarity: int = sum(len_sentimento)
+        polarity = sum(len_sentimento)
 
         return [polarity, know_words, unknow_words]
 
@@ -92,7 +92,7 @@ class NLP(object):
 
     def __atribuir_contexto(self, phrase_list:list, overallpolarity:int) -> indice_confianca:
 
-        score: int = 0
+        score = 0
 
         negative_context = ['não', 'nao', 'Não', 'Nao']
         palavras_neutras = ['gostei']
