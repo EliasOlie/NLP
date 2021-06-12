@@ -51,7 +51,7 @@ class NLP(object):
         self.process = self.__processar()
         
     def __separar_frase(self):
-        len_sentimento: list = [] #Lista que conterá a polaridade de cada palavra, para posteriormente obter o total, como neutro, positivo ou negativo
+        len_sentimento = [] #Lista que conterá a polaridade de cada palavra, para posteriormente obter o total, como neutro, positivo ou negativo
         unknow_words: int = 0     #Palavras desconhecidas é importante sua contagem, pois, dessa forma um indice de confiança fica mais preciso
         know_words: int = 0       #Palavras conhecidas, mesma razão das palavras desconhecidas
         
