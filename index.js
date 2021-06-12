@@ -25,7 +25,6 @@ app.get('/', (req, res) => {
 
 app.post('/phrase', (req, res) =>{
 
-    
     var spawn = require('child_process').spawn
     const phrase = req.body;
 
@@ -33,7 +32,6 @@ app.post('/phrase', (req, res) =>{
 
     process.stdout.on('data', function (data) {
         
-        globalThis.res_value = data.toString();
 
         res.send(data.toString())
 
