@@ -27,6 +27,16 @@ body {
     width: 100%;
     height: 7vh;
 }
+.nav-items p {
+    font-display: flex;
+    padding: 1vw;
+    font-weight: bolder;
+    position: relative;
+    right: 78%;
+}
+.nav-items p a{
+    text-decoration: none;
+}
 .nav-items nav{
     display: flex;
     padding: 1vw;
@@ -67,20 +77,22 @@ body {
 .main-content .frase-form input{
     outline: none;
     text-align: center;
-    width: 25vw;
-    height: 4vh;
+    width: 45vw;
+    height: 6vh;
     border: none;
     border: 2px solid var(--base-light-color);
 
     border-radius: .5rem;
+    color: black;
     
 }
+
 .main-content .frase-form .botao input{
     position: relative;
     top: 1rem;
-    left: 25%;
+    left: 34%;
     outline: none;
-    width: 12.5vw;
+    width: 15vw;
     height: 4vh;
     border: 2px solid var(--base-light-color);
     cursor: pointer;
