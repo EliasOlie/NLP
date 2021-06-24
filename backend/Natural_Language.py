@@ -13,16 +13,10 @@ def normalization(word) -> str:
 
 """
 TODO:
-• Colocar nome dos metodos em portugues ✔
 • Comentar o código (PT-BR) e (EN) ✖
-• Integrar com o servidor (JS) ✔
-• TypeHints e datatype personalizado ✔
 • Refatorar código para não se repetir. Usar comprehensions ✖
 • Validar frases e exeption handlers ✖
-• Unittest ✖
-• Quando o resultado é str (Não teve dados sulficientes) (__i ndice_de_confianca) ✔
 • Aumentar lista de palavras com contexto (__atribuir_contexto) ✖
-• Retorno não está como JSON, corrigir ✔
 
 """
 
@@ -50,7 +44,7 @@ class NLP(object):
         
     def __separar_frase(self):
         len_sentimento = [] #Lista que conterá a polaridade de cada palavra, para posteriormente obter o total, como neutro, positivo ou negativo
-        unknow_words = 0     #Palavras desconhecidas é importante sua contagem, pois, dessa forma um indice de confiança fica mais preciso
+        unknow_words = 0    #Palavras desconhecidas é importante sua contagem, pois, dessa forma um indice de confiança fica mais preciso
         know_words= 0       #Palavras conhecidas, mesma razão das palavras desconhecidas
         
         lista_palavra = self.frase.split()
@@ -104,6 +98,10 @@ class NLP(object):
                     score -= 1
                 else:
                     score += 1
+            else:
+                score += 1 #Gostei do livro fix <- O algoritmo esta apenas avaliando a palavra antes do 
+                           #'gostei', mas se o Gostei foi a 1° palavra então ela é positiva 
+                           #(na maioria dos casos)
         except:
             pass
 
@@ -158,6 +156,5 @@ class NLP(object):
 
 if __name__ == "__main__":
     
-    a1 = NLP('Gosto muito de você')
+    a1 = NLP('Gostei do livro')
     print(a1.process)
- 

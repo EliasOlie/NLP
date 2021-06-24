@@ -4,6 +4,12 @@ import pytest
 from .  import Natural_Language
 import json
 
+"""
+TODO 
+
+• Mover frases para um json com frases ✖
+"""
+
 frase_nao_gostei_do_pao = 'Não gostei do pão' 
 
 teste_nao_gostei_do_pao = {"Polaridade": -1, "Confidence": "75%", "Numero de palavras": 4, "Palavras desconhecidas": 1, "Mensagem": "a frase \"nao gostei do pao\" e negativa"}
@@ -16,7 +22,13 @@ teste_gosto_muito_de_voce = {"Polaridade": 1, "Confidence": "75%", "Numero de pa
 
 teste2 = {frase_gosto_muito_de_voce:teste_gosto_muito_de_voce}
 
-testes = [teste1, teste2]
+frase_gostei_do_livro = 'Gostei do livro'
+
+teste_gosto_do_livro = {"Polaridade": 1, "Confidence": "67%", "Numero de palavras": 3, "Palavras desconhecidas": 1, "Mensagem": "a frase \"gostei do livro\" e positiva"}
+
+teste3 = {frase_gostei_do_livro:teste_gosto_do_livro}
+
+testes = [teste1, teste2, teste3]
 
 @pytest.fixture
 def frase_list():
