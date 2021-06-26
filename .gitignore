@@ -1,0 +1,6 @@
+node_modules
+.env
+__pycache__
+.vscode
+.pytest_cache
+tempCodeRunnerFile.py
