@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from processamento import Natural_Language
 import json
+import os
 
 app = Flask(__name__)
 app.config['WTF_CSRF_ENABLED'] = True
@@ -30,3 +31,8 @@ def phrase_api():
     back_res = Natural_Language.NLP(frase).process   
     
     return back_res
+
+if __name__ == '__main__':
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
