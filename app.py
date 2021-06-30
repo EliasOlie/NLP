@@ -30,3 +30,6 @@ def phrase_api():
     back_res = Natural_Language.NLP(frase).process   
     
     return back_res
+
+if __name__ == '__main__':
+    app.run(debug=True)
