@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    --default-font-size: 0.75rem;
+    --larger-font-size: 5rem;
+    --text-color: #e6dd3b;
+    --main-bg-color: #289672;
+    --nav-bg-color: #1e6f5c;
+    --base-light-color: #29bb89;
+
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--text-color);
+    
+}
+
+body {
+    background-color: var(--main-bg-color);
+}
+
+.nav-items{
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--nav-bg-color);
+    width: 100%;
+    height: 7vh;
+}
+.nav-items p {
+    font-display: flex;
+    padding: 1vw;
+    font-weight: bolder;
+    position: relative;
+    right: 78%;
+}
+.nav-items p a{
+    text-decoration: none;
+}
+.nav-items nav{
+    display: flex;
+    padding: 1vw;
+}
+
+.nav-items ul{
+    
+    list-style: none;
+    margin-left: 1rem;
+}
+
+.nav-items a{
+    
+    text-decoration: none;
+}
+
+.main-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    top: 25vh;
+}
+
+.main-content h1{
+    font-size: var(--larger-font-size);
+}
+
+.content-wrapper{
+
+    position: relative;
+    top: 3rem;
+
+    width: auto;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: black;
+    background-color: var(--text-color);
+}
+
+.voltar{
+
+    display: flex;
+    position: relative;
+
+    width: 3rem;
+
+    top: 45vh;
+    left: 50%;
+
+}
+.voltar a{
+    text-decoration: none;
+
+}

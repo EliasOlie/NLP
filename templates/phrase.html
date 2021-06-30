@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="./">
-    <link rel="stylesheet" href={{ url_for('static', filename='index.css') }}>
+    <link rel="stylesheet" href={{ url_for('static', filename='phrase.css') }}>
     <title>|Elias Olie | Nlp Brasil |</title>
 </head>
 <body>
@@ -30,15 +30,10 @@
     <div class="main-content">
         <h1> < NLP/> Brasil </h1>
         <p>Natural Language Processing</p>
-        <div class="frase-form">
-            <form action="/", method="POST">
-                <input id="phrase" type="text" name="phrase" placeholder="Processar frase">
-                <div class="botao">
-                    <input type="submit" name="botao" placeholder="Processar frase" class="botaoEnviar" />
-                </div>
-
-            </form>
-        </div>
+            
+        <div class="content-wrapper">{{phrase}}</div>
+   
     </div>
+    <div class="voltar"><a href="/">Voltar</a></div>
 </body>
 </html>
