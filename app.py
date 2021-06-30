@@ -30,5 +30,3 @@ def phrase_api():
     back_res = Natural_Language.NLP(frase).process   
     
     return back_res
-
-app.run('0.0.0.0', debug=True)
