@@ -3,7 +3,7 @@ services:
     web:
         build: .
         # command: python app.py
-        command: flask run --host=0.0.0.0
+        command: python app.py
         volumes: 
             - .:/code
         ports: 
