@@ -1,0 +1,23 @@
+{
+    "não gostei do pão":{
+        "Polaridade": -1, 
+        "Confidence": "75%", 
+        "Numero de palavras": 4, 
+        "Palavras desconhecidas": 1, 
+        "Mensagem": "a frase \"nao gostei do pao\" e negativa"
+    },
+    "gosto muito de você":{
+        "Polaridade": 1, 
+        "Confidence": "75%", 
+        "Numero de palavras": 4, 
+        "Palavras desconhecidas": 1, 
+        "Mensagem": "a frase \"gosto muito de voce\" e positiva"
+    },
+    "gostei do livro":{
+        "Polaridade": 1, 
+        "Confidence": "67%", 
+        "Numero de palavras": 3, 
+        "Palavras desconhecidas": 1, 
+        "Mensagem": "a frase \"gostei do livro\" e positiva"
+    }
+}

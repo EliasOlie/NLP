@@ -3,7 +3,7 @@ services:
     web:
         build: .
         # command: python app.py
-        command: python app.py
+        command: gunicorn --bind 0.0.0.0:5000 wsgi:app & gunicorn --limit-request-line 0
         volumes: 
             - .:/code
         ports: 

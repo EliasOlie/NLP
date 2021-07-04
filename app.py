@@ -15,17 +15,17 @@ def sayhi():
         back_res = Natural_Language.NLP(data).process
         back_res = json.loads(back_res)
 
-        pretty_msg = f'{back_res["Mensagem"].capitalize()}, com {back_res["Confidence"]} de certeza.'
+        pretty_msg = f'{back_res["Mensagem"].capitalize()}, com aproximadamente {back_res["Confidence"]} de certeza.'
 
         return render_template('phrase.html', phrase=pretty_msg)
 
 @app.route('/phrase', methods=['POST'])
 def phrase_api():
-    #Pegar bytestream de dados e transformar eles em str
+    #Pegar bytestream de bytes (obvio) e transformar eles em str
     data = request.get_data(as_text=True)
     #Transformar em objeto para simplificar
     data = json.loads(data)
-    frase = data["phrase"] #Atribuir a frase
+    frase = data["phrase"] #Atribuir a variável frase a frase vinda da requisição
     
     #Instanciar a frase 
     back_res = Natural_Language.NLP(frase).process   

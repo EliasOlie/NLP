@@ -1,6 +1,16 @@
-node_modules
+#Variáveis de ambiente
 .env
+
+#Cache do python
 __pycache__
-.vscode
-.pytest_cache
 tempCodeRunnerFile.py
+
+#Configurações do ambiente de desenvolvimento
+.vscode
+
+#Cache do pytest
+.pytest_cache
+
+#Arquivos de debug e lista de afazeres
+log.txt
+todo.md
