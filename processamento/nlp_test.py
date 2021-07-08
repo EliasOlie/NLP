@@ -10,7 +10,6 @@ TODO
 • Mover frases para um json com frases ✔
 """
 
-
 def test_main():
     true_test = 0
 

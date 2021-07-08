@@ -87,28 +87,19 @@ class NLP(object):
         score = 0
 
         negative_context = ['não', 'nao', 'Não', 'Nao']
-        palavras_neutras = ['gostei']
-
+        palavras_neutras = ['gostei', 'gosto']
 
         phrase_list = phrase_list.split()
-        try:
-            context1 =  phrase_list.index(palavras_neutras[0]) - 1
-            if context1 >= 0: 
-                if palavras_neutras[0] in phrase_list and phrase_list[context1] in negative_context:
-                    score -= 1
-                else:
-                    score += 1
+
+        if any(palavra in phrase_list for palavra in palavras_neutras): # <- Abordagem correta! 
+            
+            context1 = int([phrase_list.index(palavra) for palavra in palavras_neutras if palavra in phrase_list][0]) - 1
+            if phrase_list[context1] in negative_context:
+                score -= 1
             else:
-                score += 1 #Gostei do livro fix <- O algoritmo esta apenas avaliando a palavra antes do 
-                           #'gostei', mas se o Gostei foi a 1° palavra então ela é positiva 
-                           #(na maioria dos casos)
-        except:
-            pass
+                score += 1
 
-        overallpolarity += score
-
-
-        return overallpolarity
+        return overallpolarity + score
 
     def __resumo(self,score:int, cf:float, tw:int, uw:int, msg:str) -> object:
    
@@ -156,5 +147,7 @@ class NLP(object):
 
 if __name__ == "__main__":
     
-    a1 = NLP('Gostei do livro')
+    a1 = NLP('Não gostei do pão')
+    a2 = NLP('Gostei do livro')
     print(a1.process)
+    print(a2.process)
