@@ -24,6 +24,7 @@ Cada vez mais tem se monstrado a necessidade de um modelo de processamento natur
 justamente solucionar de forma simples e prática, com um modelo estatistico essa necessidade!
 
 ### Status: Em desenvolvimento ⚠
+### Desenvolvimento em pausa devido a projetos paralelos! Voltamos em aproximadamente 3 mêses :/
 
 # Como usar
 
